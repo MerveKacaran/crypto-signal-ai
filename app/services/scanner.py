@@ -1,27 +1,31 @@
-from app.services.btcturk import get_markets
+from app.services.ticker import get_ticker
 
 
-def get_trading_pairs():
+def get_top_movers(limit=5):
     """
-    Sadece USDT ve TRY işlem çiftlerini döndürür.
+    En hareketli coinleri döndürür.
     """
 
-    response = get_markets()
+    ticker_data = get_ticker()
 
-    pairs = []
+    coins = []
 
-    for item in response["data"]["symbols"]:
+    for coin in ticker_data:
 
-        if item["status"] != "TRADING":
+        try:
+            coins.append({
+                "pair": coin["pair"],
+                "last": float(coin["last"]),
+                "daily_percent": float(coin["dailyPercent"]),
+                "volume": float(coin["volume"])
+            })
+        except (KeyError, TypeError, ValueError):
             continue
 
-        if item["quote"] not in ["TRY", "USDT"]:
-            continue
+    # Önce günlük değişime göre sırala
+    coins.sort(
+        key=lambda x: abs(x["daily_percent"]),
+        reverse=True
+    )
 
-        pairs.append({
-            "symbol": item["name"],
-            "base": item["numerator"],
-            "quote": item["denominator"]
-        })
-
-    return pairs
+    return coins[:limit]
