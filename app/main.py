@@ -25,3 +25,10 @@ from app.services.scanner import get_trading_pairs
 @app.get("/pairs")
 def pairs():
     return get_trading_pairs()
+
+from app.services.ticker import get_ticker
+
+
+@app.get("/ticker")
+def ticker():
+    return get_ticker()
