@@ -19,3 +19,9 @@ def root():
 @app.get("/markets")
 def markets():
     return get_markets()
+from app.services.scanner import get_trading_pairs
+
+
+@app.get("/pairs")
+def pairs():
+    return get_trading_pairs()
