@@ -1,3 +1,5 @@
+from app.indicators.signal import generate_signal
+
 from app.indicators.macd import calculate_macd
 
 from app.indicators.rsi import calculate_rsi
@@ -97,3 +99,17 @@ def test_macd():
     ]
 
     return calculate_macd(prices)
+
+@app.get("/test-signal")
+def test_signal():
+
+    prices = [
+        100,101,102,103,104,105,106,107,108,109,
+        110,111,112,113,114,115,116,117,118,119,
+        120,121,122,123,124,125,126,127,128,129,
+        130,131,132,133,134,135,136,137,138,139,
+        140,141,142,143,144,145,146,147,148,149,
+        150,151,152,153,154,155,156,157,158,159
+    ]
+
+    return generate_signal(prices)
