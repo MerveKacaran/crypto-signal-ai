@@ -1,15 +1,21 @@
 from fastapi import FastAPI
 
+from app.services.btcturk import get_markets
+
 app = FastAPI(
     title="Crypto Signal AI",
-    version="1.0.0",
-    description="AI Destekli BTCTürk Teknik Analiz Platformu"
+    version="1.0.0"
 )
+
 
 @app.get("/")
 def root():
     return {
         "project": "Crypto Signal AI",
-        "status": "running",
-        "version": "1.0.0"
+        "status": "running"
     }
+
+
+@app.get("/markets")
+def markets():
+    return get_markets()
