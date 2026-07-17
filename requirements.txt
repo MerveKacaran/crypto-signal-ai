@@ -4,6 +4,5 @@ requests
 websockets
 pandas
 numpy
-pandas-ta
 python-dotenv
 httpx
