@@ -49,3 +49,20 @@ def top_movers():
 @app.get("/candles")
 def candles(pair: str = "BTCUSDT", interval: str = "1h"):
     return get_candles(pair, interval)
+
+from app.indicators.ema import calculate_ema
+
+
+@app.get("/test-ema")
+def test_ema():
+
+    prices = [
+        10,11,12,13,14,
+        15,16,17,18,19,
+        20,21,22,23,24,
+        25,26,27,28,29
+    ]
+
+    ema = calculate_ema(prices, 5)
+
+    return ema
