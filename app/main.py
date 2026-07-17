@@ -1,5 +1,3 @@
-from app.services.scanner import get_top_movers
-
 from app.services.ticker import get_ticker
 
 from fastapi import FastAPI
@@ -25,11 +23,6 @@ def markets():
     return get_markets()
 from app.services.scanner import get_trading_pairs
 
-
-@app.get("/pairs")
-def pairs():
-    return get_trading_pairs()
-
 from app.services.ticker import get_ticker
 
 
@@ -40,6 +33,12 @@ def ticker():
 @app.get("/ticker")
 def ticker():
     return get_ticker()
+
+@app.get("/top-movers")
+def top_movers():
+    return get_top_movers()
+
+from app.services.scanner import get_top_movers
 
 @app.get("/top-movers")
 def top_movers():
