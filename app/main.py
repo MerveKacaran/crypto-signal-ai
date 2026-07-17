@@ -1,3 +1,5 @@
+from app.services.ticker import get_ticker
+
 from fastapi import FastAPI
 
 from app.services.btcturk import get_markets
@@ -28,6 +30,10 @@ def pairs():
 
 from app.services.ticker import get_ticker
 
+
+@app.get("/ticker")
+def ticker():
+    return get_ticker()
 
 @app.get("/ticker")
 def ticker():
