@@ -1,3 +1,5 @@
+from app.indicators.rsi import calculate_rsi
+
 from app.services.ticker import get_ticker
 
 from app.services.candles import get_candles
@@ -66,3 +68,16 @@ def test_ema():
     ema = calculate_ema(prices, 5)
 
     return ema
+
+@app.get("/test-rsi")
+def test_rsi():
+
+    prices = [
+        44.34,44.09,44.15,43.61,44.33,
+        44.83,45.10,45.42,45.84,46.08,
+        45.89,46.03,45.61,46.28,46.28,
+        46.00,46.03,46.41,46.22,45.64,
+        46.21,46.25,45.71,46.45,45.78
+    ]
+
+    return calculate_rsi(prices)
