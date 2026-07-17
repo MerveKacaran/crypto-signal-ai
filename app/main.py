@@ -1,3 +1,5 @@
+from app.services.scanner import get_top_movers
+
 from app.services.ticker import get_ticker
 
 from fastapi import FastAPI
@@ -38,3 +40,7 @@ def ticker():
 @app.get("/ticker")
 def ticker():
     return get_ticker()
+
+@app.get("/top-movers")
+def top_movers():
+    return get_top_movers()
