@@ -1,3 +1,7 @@
+from app.services.candles import get_candles
+
+from app.utils.prices import get_close_prices
+
 from app.indicators.signal import generate_signal
 
 from app.indicators.macd import calculate_macd
@@ -113,3 +117,18 @@ def test_signal():
     ]
 
     return generate_signal(prices)
+
+@app.get("/btc-analysis")
+def btc_analysis():
+
+    candles = get_candles()
+
+    closes = get_close_prices(candles)
+
+    signal = generate_signal(closes)
+
+    return {
+        "coin": "BTCUSDT",
+        "candles": len(closes),
+        "signal": signal
+    }
