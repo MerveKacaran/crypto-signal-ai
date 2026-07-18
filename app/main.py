@@ -154,3 +154,12 @@ def signals():
 
     return analyze_market()
 
+from app.api.health import router as health_router
+from app.api.market import router as market_router
+from app.api.signals import router as signals_router
+from app.api.analysis import router as analysis_router
+
+app.include_router(health_router)
+app.include_router(market_router)
+app.include_router(signals_router)
+app.include_router(analysis_router)
