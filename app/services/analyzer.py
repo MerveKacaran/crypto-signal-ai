@@ -1,3 +1,4 @@
+from app.schemas.signal import SignalResponse
 from app.services.ticker import get_ticker
 from app.services.candles import get_candles
 from app.utils.prices import get_close_prices
@@ -32,13 +33,23 @@ def analyze_market(limit=5):
 
             signal = generate_signal(closes)
 
-            results.append({
-                "pair": pair,
-                "price": float(coin["last"]),
-                "daily_change": float(coin["dailyPercent"]),
-                "signal": signal["signal"],
-                "score": signal["score"]
-            })
+            results.append(
+
+    SignalResponse(
+
+        pair=pair,
+
+        price=float(coin["last"]),
+
+        daily_change=float(coin["dailyPercent"]),
+
+        signal=signal["signal"],
+
+        score=signal["score"]
+
+    )
+
+)
 
         except Exception:
             continue
