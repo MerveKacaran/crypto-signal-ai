@@ -1,3 +1,5 @@
+from app.services.analyzer import analyze_market
+
 from app.services.candles import get_candles
 
 from app.utils.prices import get_close_prices
@@ -132,3 +134,8 @@ def btc_analysis():
         "candles": len(closes),
         "signal": signal
     }
+
+@app.get("/signals")
+def signals():
+
+    return analyze_market()
