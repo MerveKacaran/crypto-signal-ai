@@ -1,3 +1,8 @@
+import asyncio
+
+from contextlib import asynccontextmanager
+from app.background.scanner import scanner_loop
+
 from app.services.analyzer import analyze_market
 
 from app.services.candles import get_candles
@@ -18,9 +23,18 @@ from fastapi import FastAPI
 
 from app.services.btcturk import get_markets
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+
+    asyncio.create_task(scanner_loop())
+
+    yield
+
+
 app = FastAPI(
     title="Crypto Signal AI",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 
@@ -139,3 +153,4 @@ def btc_analysis():
 def signals():
 
     return analyze_market()
+
